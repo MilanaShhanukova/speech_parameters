@@ -1,10 +1,12 @@
 # Speech parameters analytics
 
-### **Main Problem to solve:** most metrics are either used separately or used without any description and meaning of the score.
+### **Main Problem to solve:** 
+Most metrics are either used separately or used without any description and meaning of the score.
 
 *For instance, if you get two metrics MOS 3.4 and SNR 3.4, there is no framework to get these metrics together and understand the values.* 
 
-### **Main goal: to create a pipeline to get the values of the speech quality with both metrics description and the meaning of the scores.**
+### **Main goal:**
+To create a pipeline to get the values of the speech quality with both metrics description and the meaning of the scores.**
 
 ### Types of the Metrics
 
