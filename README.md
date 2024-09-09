@@ -6,7 +6,15 @@ Most metrics are either used separately or used without any description and mean
 *For instance, if you get two metrics MOS 3.4 and SNR 3.4, there is no framework to get these metrics together and understand the values.* 
 
 ### **Main goal:**
-To create a pipeline to get the values of the speech quality with both metrics description and the meaning of the scores.**
+To create a pipeline to get the values of the speech quality with both metrics description and the meaning of the scores.
+
+### **Example of running:**
+```
+from subjective.mos_metric import MOSMetric
+
+mos_metric = MOSMetric()
+mos_metric.score_audio(audio_path_example)
+```
 
 ### Types of the Metrics
 
