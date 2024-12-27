@@ -8,12 +8,25 @@ Most metrics are either used separately or used without any description and mean
 ### **Main goal:**
 To create a pipeline to get the values of the speech quality with both metrics description and the meaning of the scores.
 
-### **Example of running:**
+### **Example of applying one metric:**
 ```
 from subjective.mos_metric import MOSMetric
 
 mos_metric = MOSMetric()
 mos_metric.score_audio(audio_path_example)
+```
+
+### **Example of running the metrics pipeline over multiple files:**
+First, you need to create a csv file that includes either one column (target audio paths) or two columns (target and source audio paths). To analyse all of the files use:
+
+```
+python metrics_frame_pipe.py --csv_path speech_parameters/dataframe_example_noisy.csv --dirty_column file_path --metrics MOS SNR SRMR C50 --output_file noisy_examples_wavs.csv
+```
+
+Afterwards you can analyse the metrics you've calculated with the following command:
+
+```
+python speech_parameters/metrics_analytics.py --results_csv /speech_parameters/noisy_examples_wavs.csv
 ```
 
 ### Types of the Metrics
@@ -102,14 +115,25 @@ Signal-to-noise ratio (SNR) is a measure used in science and engineering that c
 - **Scale-Invariant-Signal-Distortion-Ratio**
     - Paired metric.
 
-```json
-    "Scale-Invariant-Signal-Distortion-Ratio": {
-        "description": "Scale-Invariant Signal Distortion Ratio (SI-SDR) is a metric used to evaluate the performance of source separation algorithms. It measures the distortion of the separated signals in a scale-invariant manner, making it robust against variations in signal amplitude.",
-        "low": "Low values indicate high distortion and poor separation quality.",
-        "high": "High values indicate low distortion and better separation quality."
+    ```json
+        "Scale-Invariant-Signal-Distortion-Ratio": {
+            "description": "Scale-Invariant Signal Distortion Ratio (SI-SDR) is a metric used to evaluate the performance of source separation algorithms. It measures the distortion of the separated signals in a scale-invariant manner, making it robust against variations in signal amplitude.",
+            "low": "Low values indicate high distortion and poor separation quality.",
+            "high": "High values indicate low distortion and better separation quality."
+        }
+    ```
+
+- **SpeechReverberationModulationEnergyRatio**
+    - Unpaired metric.
+    ```json
+        "SpeechReverberationModulationEnergyRatio": {
+            "description": "Speech to Reverberation Modulation energy Ratio (SRMR) is a non-intrusive metric that measures the speech quality and level of reverberation in audio signals. It analyzes the modulation energy content of speech to estimate the amount of reverberation present.",
+            "low": "Low values indicate high reverberation and potentially poor speech quality.",
+            "high": "High values indicate low reverberation and better speech quality."
     }
-```
+    ```
+
 
 Paired metrics: [’**Scale-Invariant-Signal-Distortion-Ratio’, ‘ESTOI’, ‘STOI’, ‘PESQ’**]
 
-Unpaired metrics: [’**C50’, ‘SNR’, ‘MOS’**]
+Unpaired metrics: [’**C50’, ‘SNR’, ‘MOS’, ‘SRMRMetric’**]

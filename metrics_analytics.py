@@ -89,10 +89,11 @@ def print_analysis(results):
         print("-" * 80)
 
 if __name__ == "__main__":
+    # python speech_parameters/metrics_analytics.py --results_csv /speech_parameters/noisy_examples_wavs.csv
     parser = argparse.ArgumentParser(description="Analyze audio quality metrics")
     parser.add_argument("--results_csv", required=True, help="Path to the CSV file with metric results")
     parser.add_argument("--descriptions_json", 
-                       default="/mount/studenten-temp1/users/milana/speech_parameters/metrics_descriptions.json",
+                       default="./speech_parameters/metrics_descriptions.json",
                        help="Path to the JSON file with metric descriptions")
     
     args = parser.parse_args()
@@ -100,9 +101,8 @@ if __name__ == "__main__":
     results = analyze_audio_quality(args.results_csv, args.descriptions_json)
     print_analysis(results)
     
-    # Optionally save to JSON
     output_json = args.results_csv.replace('.csv', '_analysis.json')
     with open(output_json, 'w') as f:
         json.dump(results, f, indent=2)
-        
+
     print(f"\nDetailed analysis saved to: {output_json}")

@@ -102,6 +102,7 @@ def run_pipe(audio_files_target: List[str], metrics: List[str], output_csv: str,
     return df
 
 if __name__ == "__main__":
+    # python metrics_frame_pipe.py --csv_path speech_parameters/dataframe_example_noisy.csv --dirty_column file_path --metrics MOS SNR SRMR C50 --output_file noisy_examples_wavs.csv
     parser = argparse.ArgumentParser(description="Run specified metrics on audio files")
     parser.add_argument("--csv_path", type=str, help="model that was used")
     parser.add_argument("--dirty_column", type=str, help="column that includes dirty files")
