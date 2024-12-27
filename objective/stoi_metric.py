@@ -10,17 +10,19 @@ class STOIMetric(Metric):
     def __init__(self, sr=16000):
         super().__init__()
 
-    def score_pair_audio(self, source_audio_path: str, target_audio_path: str):
+    def score_pair_audio(self, audio_path: str, source_audio_path: str):
+        """
+        :param audio_path: generated, clean, preprocessed audio
+        :param source_audio_path: the original audio, dirty or not generated one.
+        """
         audio_ref = resample_audio(source_audio_path)
-        audio_deg = resample_audio(target_audio_path)
+        audio_deg = resample_audio(audio_path)
 
         audio_ref = audio_ref.squeeze().numpy()
         audio_deg = audio_deg.squeeze().numpy()[: audio_ref.shape[0]]
 
         if audio_ref.shape[0] > audio_deg.shape[0]:
             audio_ref = audio_ref[: audio_deg.shape[0]]
-
-        print(f"shapes: {audio_ref.shape}, {audio_deg.shape}")
 
         stoi_score = stoi(audio_ref, audio_deg, 16000)
         return stoi_score

@@ -35,10 +35,14 @@ class C50Metric(Metric):
         except Exception:
             return -420.69
 
-    def score_pair_audio(self, source_audio_path: str, target_audio_path: str):
-        score_clean = self.score_audio(target_audio_path)
-        score_dirty = self.score_audio(source_audio_path)
-        # positive difference -> the dirty sample is worse quality
+    def score_pair_audio(self, audio_path: str, source_audio_path: str):
+        """
+        :param audio_path: generated, clean, preprocessed audio
+        :param source_audio_path: the original audio, dirty or not generated one.
+        """
+        score_clean = self.score_audio(source_audio_path)
+        score_dirty = self.score_audio(audio_path)
+        # positive difference -> the generated/cleaned audio is better than source
         return score_clean - score_dirty
 
     def explain_score(self):

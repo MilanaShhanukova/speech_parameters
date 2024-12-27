@@ -13,9 +13,13 @@ class ESTOIMetric(Metric):
         """
         super().__init__()
 
-    def score_pair_audio(self, source_audio_path: str, target_audio_path: str):
-        audio_ref = resample_audio(source_audio_path)
-        audio_deg = resample_audio(target_audio_path)
+    def score_pair_audio(self, audio_path: str, source_audio_path: str):
+        """
+        :param audio_path: generated, clean, preprocessed audio
+        :param source_audio_path: the original audio, dirty or not generated one.
+        """
+        audio_ref = resample_audio(audio_path)
+        audio_deg = resample_audio(source_audio_path)
 
         audio_ref = audio_ref.squeeze().numpy()
         audio_deg = audio_deg.squeeze().numpy()[: audio_ref.shape[0]]
