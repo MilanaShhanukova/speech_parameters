@@ -33,5 +33,10 @@
         "description": "Scale-Invariant Signal Distortion Ratio (SI-SDR) is a metric used to evaluate the performance of source separation algorithms. It measures the distortion of the separated signals in a scale-invariant manner, making it robust against variations in signal amplitude.",
         "low": "Low values indicate high distortion and poor separation quality.",
         "high": "High values indicate low distortion and better separation quality."
+    },
+    "SRMR": {
+        "description": "Speech to Reverberation Modulation energy Ratio (SRMR) is a non-intrusive metric that measures the speech quality and level of reverberation in audio signals. It analyzes the modulation energy content of speech to estimate the amount of reverberation present.",
+        "low": "Low values indicate high reverberation and potentially poor speech quality.",
+        "high": "High values indicate low reverberation and better speech quality."
     }
 }

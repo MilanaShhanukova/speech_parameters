@@ -13,6 +13,7 @@ from objective.snr_metric import SnrMetric
 from objective.stoi_metric import STOIMetric
 from subjective.mos_metric import MOSMetric
 from subjective.pesq_metric import PESQMetric
+from objective.srmr_metric import SRMRMetric
 
 
 class SuppressOutput:
@@ -31,19 +32,20 @@ class SuppressOutput:
 
 def run_specified_metrics(audio_dirty, metrics, audio_clean=None, explain=True):
     metric_instances = {
-        "STOI": (STOIMetric(), "referenced"),
-        "MOS": (MOSMetric(), "not_referenced"),
-        "C50": (C50Metric(), "not_referenced"),
-        "ESTOI": (ESTOIMetric(), "referenced"),
-        "PESQ": (PESQMetric(), "referenced"),
-        "SD": (SignalDistortionMetric(), "referenced"),
-        "SNR": (SnrMetric(), "not_referenced"),
+        "STOI": (STOIMetric, "referenced"),
+        "MOS": (MOSMetric, "not_referenced"),
+        "C50": (C50Metric, "not_referenced"),
+        "ESTOI": (ESTOIMetric, "referenced"),
+        "PESQ": (PESQMetric, "referenced"),
+        "SD": (SignalDistortionMetric, "referenced"),
+        "SNR": (SnrMetric, "not_referenced"),
+        "SRMR": (SRMRMetric, "not_referenced")
     }
 
     results = {}
     for metric_name in tqdm(metrics):
         if metric_name in metric_instances:
-            metric_instance = metric_instances[metric_name][0]
+            metric_instance = metric_instances[metric_name][0]()
             if explain:
                 metric_instance.explain_score()
             metric_type = metric_instances[metric_name][1]
